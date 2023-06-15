@@ -1,0 +1,20 @@
+build:
+	g++ \
+	-Wfatal-errors \
+	-std=c++11 \
+	main.cpp \
+	game.cpp \
+	well.cpp \
+	tetromino.cpp \
+	-I"C:\SDL2\include" \
+	-L"C:\SDL2\lib" \
+	-lmingw32 \
+	-lSDL2main \
+	-lSDL2 \
+	-o build.exe
+
+run:
+	build.exe
+
+clear:
+	del *.exe && del tempCodeRunnerFile.py
