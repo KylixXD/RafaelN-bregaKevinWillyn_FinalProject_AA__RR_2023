@@ -4,13 +4,13 @@
 
 Game::Game():
   tetromino_{static_cast<Tetromino::Type>(rand() % 7)},
-  moveTime_(SDL_GetTicks())
-{
+  moveTime_(SDL_GetTicks()){
   if (SDL_Init(SDL_INIT_VIDEO) != 0)
     throw std::runtime_error("SDL_Init(SDL_INIT_VIDEO)");
-  SDL_CreateWindowAndRenderer(720 / 2, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_BORDERLESS, &window_, &renderer_);
-  SDL_SetWindowPosition(window_, 65, 126);
-}
+  SDL_CreateWindowAndRenderer(720 / 2, 720, SDL_WINDOW_OPENGL, &window_, &renderer_);
+  //SDL_SetWindowPosition(window_, 65, 126);
+ }
+ 
 
 Game::~Game()
 {
@@ -100,3 +100,4 @@ void Game::check(const Tetromino &t)
     tetromino_ = t;
   }
 }
+
