@@ -1,16 +1,25 @@
 #include "game.hpp"
 #include <stdexcept>
 #include <iostream>
+#include <string> 
 
 Game::Game():
   tetromino_{static_cast<Tetromino::Type>(rand() % 7)},
-  moveTime_(SDL_GetTicks()){
+  moveTime_(SDL_GetTicks())
+  {
+  if(TTF_Init() == -1){
+    throw std::runtime_error("Failed to initialize SDL_ttf");
+  }
+
   if (SDL_Init(SDL_INIT_VIDEO) != 0)
     throw std::runtime_error("SDL_Init(SDL_INIT_VIDEO)");
   SDL_CreateWindowAndRenderer(720 / 2, 720, SDL_WINDOW_OPENGL, &window_, &renderer_);
-  //SDL_SetWindowPosition(window_, 65, 126);
- }
+  SDL_SetWindowPosition(window_, 65, 126);
  
+  font_ = TTF_OpenFont("fonts\\8bitOperatorPlus-Regular.ttf", 20);
+ 
+  label = createLabel(renderer_,font_ ,"text", 10, 10);
+}
 
 Game::~Game()
 {
@@ -73,6 +82,7 @@ bool Game::tick()
   SDL_RenderClear(renderer_);
   well_.draw(renderer_);
   tetromino_.draw(renderer_);
+  renderLabel(renderer_, label);
   if (SDL_GetTicks() > moveTime_)
   {
     moveTime_ += 1000;
@@ -100,4 +110,3 @@ void Game::check(const Tetromino &t)
     tetromino_ = t;
   }
 }
-

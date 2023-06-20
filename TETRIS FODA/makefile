@@ -6,6 +6,7 @@ build:
 	game.cpp \
 	well.cpp \
 	tetromino.cpp \
+	label.c \
 	-I"C:\SDL2\include" \
 	-L"C:\SDL2\lib" \
 	-lmingw32 \
